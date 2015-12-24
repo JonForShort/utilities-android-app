@@ -44,7 +44,7 @@ public class FileBrowserActivity extends Activity
     public void onFileListItemClicked(final String selectedFilePath) {
         final String absoluteFilePath = mCurrentPath.endsWith(File.separator) ?
                 mCurrentPath + selectedFilePath : mCurrentPath + File.separator + selectedFilePath;
-        final boolean isDirectory = new File(mCurrentPath).isDirectory();
+        final boolean isDirectory = new File(absoluteFilePath).isDirectory();
         if (isDirectory) {
             mCurrentPath = absoluteFilePath;
             updateFileList(absoluteFilePath);
@@ -83,7 +83,7 @@ public class FileBrowserActivity extends Activity
             contents = new String[0];
         }
 
-        mFileListAdapter.updateContents(contents);
+        mFileListAdapter.updateContents(path, contents);
         mFileListAdapter.notifyDataSetChanged();
     }
 }
